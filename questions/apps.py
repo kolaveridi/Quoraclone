@@ -7,3 +7,4 @@ class QuestionsConfig(AppConfig):
     
     def redy(self):
         import questions.signals
+        
