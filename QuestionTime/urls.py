@@ -39,6 +39,8 @@ urlpatterns = [
          include("rest_auth.urls")),
     path("api/",
          include("users.api.urls")),
+    path("api/",
+         include("questions.api.urls")),
         
     path("api/rest-auth/registration/",
          include("rest_auth.registration.urls")),

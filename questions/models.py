@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 from django.conf import settings
-
+from django.template.defaultfilters import slugify
 
 class Question(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
@@ -12,6 +12,12 @@ class Question(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL,
                                on_delete=models.CASCADE,
                                related_name="questions")
+    def save(self, *args, **kwargs):
+        if not self.id:
+            # Newly created object, so set slug
+            self.slug = slugify(self.content)
+
+        super(Question, self).save(*args, **kwargs)
     
 class Answer(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
